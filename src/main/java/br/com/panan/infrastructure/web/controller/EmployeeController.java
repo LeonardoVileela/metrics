@@ -2,9 +2,7 @@ package br.com.panan.infrastructure.web.controller;
 
 
 import br.com.panan.domain.employee.Employee;
-import br.com.panan.domain.survey.Survey;
 import br.com.panan.requests.EmployeePostRequestBody;
-import br.com.panan.requests.SurveyPostRequestBody;
 import br.com.panan.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;

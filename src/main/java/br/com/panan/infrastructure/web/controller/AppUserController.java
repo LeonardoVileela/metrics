@@ -20,6 +20,7 @@ public class AppUserController {
 		appUser.setUsername(appUser.getUsername().toLowerCase().trim());
 		PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 		appUser.setPassword(encoder.encode(appUser.getPassword()));
+
 		return appUserRepository.save(appUser);
 	}
 

@@ -7,8 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
@@ -26,5 +26,11 @@ public class Survey {
 
     @ManyToOne
     private Employee employee;
+
+    @NotNull(message = "the dateTime is mandatory")
+    private LocalDate date;
+
+    @NotNull(message = "the hour is mandatory")
+    private String hour;
 
 }
