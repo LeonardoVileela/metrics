@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/panan?useSSL=false&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true
+    username: root
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+
+server:
+  error:
+    include-stacktrace: on_param # isso serve para tirar todas os logs loucos do status 400
+# se vc precisar das informações , vc usa "trace=true" na URL
