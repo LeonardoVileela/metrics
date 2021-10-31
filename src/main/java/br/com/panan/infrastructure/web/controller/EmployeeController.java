@@ -27,7 +27,7 @@ public class EmployeeController {
 
     // @Valid serve pra ativar a validação dos campos
     @PostMapping
-    public ResponseEntity<Employee> save(@RequestBody @Valid EmployeePostRequestBody employeePostRequestBody){ //para cada post usar uma classa auxiliar para não poluir e bloquear por exemplo o id
+    public ResponseEntity<Employee> save(@RequestBody @Valid EmployeePostRequestBody employeePostRequestBody) { //para cada post usar uma classa auxiliar para não poluir e bloquear por exemplo o id
         return new ResponseEntity<>(employeeService.save(employeePostRequestBody), HttpStatus.CREATED);
     }
 }

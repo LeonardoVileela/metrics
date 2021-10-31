@@ -25,5 +25,6 @@ public class Employee {
     @NotEmpty(message = "the code is mandatory")
     private String code;
 
+    private Boolean active;
 
 }

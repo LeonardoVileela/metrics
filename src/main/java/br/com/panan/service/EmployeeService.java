@@ -2,6 +2,7 @@ package br.com.panan.service;
 
 import br.com.panan.domain.employee.Employee;
 import br.com.panan.domain.employee.EmployeeRepository;
+import br.com.panan.exception.BadRequestException;
 import br.com.panan.mapper.EmployeeMapper;
 import br.com.panan.requests.EmployeePostRequestBody;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,12 @@ public class EmployeeService {
     @Transactional(rollbackFor = Exception.class)
     public Employee save(EmployeePostRequestBody employeePostRequestBody) {
         // faço o mapeamento apenas com essa linha AnimeMapper.INSTANCE.toAnime(animePostRequestBody)
-        return employeeRepository.save(EmployeeMapper.INSTANCE.toEmployee(employeePostRequestBody));
+        if (!employeeRepository.findByCode(employeePostRequestBody.getCode()).isEmpty()) {
+            throw new BadRequestException("There is already another employee with this code");
+        }
+        Employee employee = EmployeeMapper.INSTANCE.toEmployee(employeePostRequestBody);
+        employee.setActive(true);
+        return employeeRepository.save(employee);
     }
 
 }
