@@ -26,8 +26,11 @@ public class SurveyController {
 
     // @Valid serve pra ativar a validação dos campos
     @PostMapping
-    public ResponseEntity<Survey> save(@RequestBody @Valid SurveyPostRequestBody surveyPostRequestBody) { //para cada post usar uma classa auxiliar para não poluir e bloquear por exemplo o id
-        return new ResponseEntity<>(surveyService.save(surveyPostRequestBody), HttpStatus.CREATED);
+    public ResponseEntity<Object> save(@RequestBody @Valid SurveyPostRequestBody surveyPostRequestBody) { //para cada post usar uma classa auxiliar para não poluir e bloquear por exemplo o id
+        if(surveyService.save(surveyPostRequestBody).getId() != null){
+           return new ResponseEntity<>(HttpStatus.CREATED);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
 }

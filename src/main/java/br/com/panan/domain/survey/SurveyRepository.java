@@ -29,6 +29,9 @@ public interface SurveyRepository extends JpaRepository<Survey, Long> {
     @Query("SELECT DISTINCT sur from Survey sur where year(sur.date) = ?1 AND sur.employee.id = ?2")
     public List<Survey> listSurveyForYearEmployee(Integer year , Long idEmployee);
 
+    @Query("SELECT DISTINCT sur from Survey sur where sur.employee.id = ?1")
+    public List<Survey> listSurveyWithIdEmployee(Long id);
+
 
 
 

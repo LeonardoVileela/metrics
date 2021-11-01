@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
@@ -22,6 +24,8 @@ public class Survey {
     private Long id;
 
     @NotNull(message = "the note is mandatory")
+    @Max(5)
+    @Min(1)
     private Integer note;
 
     @ManyToOne

@@ -7,12 +7,15 @@ import javax.validation.constraints.NotEmpty;
 @Data
 public class EmployeeAllActiveGetRequest {
 
-    @NotEmpty(message = "the name is mandatory")
+    public EmployeeAllActiveGetRequest(String name, String code, Double average) {
+        this.name = name;
+        this.code = code;
+        this.average = average;
+    }
+
     private String name;
 
-    @NotEmpty(message = "the code is mandatory")
     private String code;
 
-    @NotEmpty(message = "the average is mandatory")
     private Double average;
 }

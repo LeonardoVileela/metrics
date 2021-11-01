@@ -2,6 +2,7 @@ package br.com.panan.infrastructure.web.controller;
 
 
 import br.com.panan.domain.employee.Employee;
+import br.com.panan.requests.EmployeeAllActiveGetRequest;
 import br.com.panan.requests.EmployeePostRequestBody;
 import br.com.panan.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
@@ -38,7 +39,7 @@ public class EmployeeController {
     }
 
     @GetMapping(path = "/active")
-    public ResponseEntity<List<Employee>> listEmployeesAllActive(){
+    public ResponseEntity<List<EmployeeAllActiveGetRequest>> listEmployeesAllActive(){
         return ResponseEntity.ok(employeeService.employeesAllActive());
     }
 
