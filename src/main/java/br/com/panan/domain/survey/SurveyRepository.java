@@ -14,8 +14,8 @@ public interface SurveyRepository extends JpaRepository<Survey, Long> {
     @Query("SELECT DISTINCT sur from Survey sur where sur.date >= ?1 AND sur.date <= ?2")
     public List<Survey> listSurveyForDates(LocalDate localDateSmaller, LocalDate localDateBigger);
 
-    @Query("SELECT DISTINCT sur from Survey sur where month(sur.date) = ?1")
-    public List<Survey> listSurveyForMonth(Integer mes);
+    @Query("SELECT DISTINCT sur from Survey sur where month(sur.date) = ?1 AND year(sur.date) = ?2")
+    public List<Survey> listSurveyForMonth(Integer mes, Integer year);
 
     @Query("SELECT DISTINCT sur from Survey sur where year(sur.date) = ?1")
     public List<Survey> listSurveyForYear(Integer year);
@@ -23,8 +23,8 @@ public interface SurveyRepository extends JpaRepository<Survey, Long> {
     @Query("SELECT DISTINCT sur from Survey sur where sur.date >= ?1 AND sur.date <= ?2 AND sur.employee.id = ?3")
     public List<Survey> listSurveyForDatesEmployee(LocalDate localDateSmaller, LocalDate localDateBigger, Long idEmployee);
 
-    @Query("SELECT DISTINCT sur from Survey sur where month(sur.date) = ?1 AND sur.employee.id = ?2")
-    public List<Survey> listSurveyForMonthEmployee(Integer mes , Long idEmployee);
+    @Query("SELECT DISTINCT sur from Survey sur where month(sur.date) = ?1 AND year(sur.date) = ?2 AND sur.employee.id = ?2")
+    public List<Survey> listSurveyForMonthEmployee(Integer mes , Integer year, Long idEmployee);
 
     @Query("SELECT DISTINCT sur from Survey sur where year(sur.date) = ?1 AND sur.employee.id = ?2")
     public List<Survey> listSurveyForYearEmployee(Integer year , Long idEmployee);

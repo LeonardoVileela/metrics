@@ -18,6 +18,9 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     public Page<Employee> listAllDisabled(Pageable pageable);
 
 
+
+
+
     @Query("SELECT DISTINCT emp from Employee emp where emp.active = true")
     public List<Employee> listAllActive();
 

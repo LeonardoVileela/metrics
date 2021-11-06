@@ -1,6 +1,7 @@
 package br.com.panan.infrastructure.web.controller;
 
 import br.com.panan.requests.GeneralStatisticsGetRequestBody;
+import br.com.panan.requests.GeneralStatisticsGetRequestBodyYear;
 import br.com.panan.service.StatisticService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -28,15 +29,15 @@ public class StatisticController {
     }
 
     @GetMapping(path = "/month")
-    public ResponseEntity<GeneralStatisticsGetRequestBody> findByMonth(@RequestParam Integer month, @RequestParam(required = false) Long idEmployee) {
+    public ResponseEntity<GeneralStatisticsGetRequestBody> findByMonth(@RequestParam Integer month, @RequestParam Integer year, @RequestParam(required = false) Long idEmployee) {
         if (idEmployee != null) {
-            return ResponseEntity.ok(statisticService.getStatisticForMonthEmployee(month, idEmployee));
+            return ResponseEntity.ok(statisticService.getStatisticForMonthEmployee(month, year, idEmployee));
         }
-        return ResponseEntity.ok(statisticService.getStatisticForMonth(month));
+        return ResponseEntity.ok(statisticService.getStatisticForMonth(month, year));
     }
 
     @GetMapping(path = "/year")
-    public ResponseEntity<GeneralStatisticsGetRequestBody> findByYear(@RequestParam Integer year, @RequestParam(required = false) Long idEmployee) {
+    public ResponseEntity<GeneralStatisticsGetRequestBodyYear> findByYear(@RequestParam Integer year, @RequestParam(required = false) Long idEmployee) {
         if (idEmployee != null) {
             return ResponseEntity.ok(statisticService.getStatisticForYearEmployee(year, idEmployee));
         }

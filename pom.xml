@@ -8,10 +8,10 @@
         <version>2.5.6</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.receitas</groupId>
-    <artifactId>receitas</artifactId>
+    <groupId>br.com.panan</groupId>
+    <artifactId>panan</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>receitas</name>
+    <name>panan</name>
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>11</java.version>

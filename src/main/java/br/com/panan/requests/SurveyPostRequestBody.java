@@ -11,6 +11,6 @@ public class SurveyPostRequestBody {
     private Integer note;
 
     @NotNull(message = "the idEmployee is mandatory")
-    private Long idEmployee;
+    private String code;
 
 }

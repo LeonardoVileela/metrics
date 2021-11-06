@@ -30,7 +30,7 @@ public class SurveyService {
         // faço o mapeamento apenas com essa linha AnimeMapper.INSTANCE.toAnime(animePostRequestBody)
         Survey survey = new Survey();
         survey.setNote(surveyPostRequestBody.getNote());
-        survey.setEmployee(employeeRepository.findById(surveyPostRequestBody.getIdEmployee()).orElseThrow());
+        survey.setEmployee(employeeRepository.findByCode(surveyPostRequestBody.getCode()).orElseThrow());
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         LocalDateTime date = LocalDateTime.now(ZoneId.of("America/Cuiaba"));
