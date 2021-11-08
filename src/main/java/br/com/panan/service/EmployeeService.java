@@ -37,7 +37,7 @@ public class EmployeeService {
         List<Employee> employees = employeeRepository.listAllActive();
         List<EmployeeAllActiveGetRequest> employeeAllActiveGetRequests = new ArrayList<>();
         for (Employee emp : employees) {
-            employeeAllActiveGetRequests.add(new EmployeeAllActiveGetRequest(emp.getName(), emp.getCode(), averageEmployee(emp.getId())));
+            employeeAllActiveGetRequests.add(new EmployeeAllActiveGetRequest(emp.getId() ,emp.getName(), emp.getCode(), averageEmployee(emp.getId())));
         }
         return employeeAllActiveGetRequests;
     }
