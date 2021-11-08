@@ -10,7 +10,9 @@ public class SurveyPostRequestBody {
     @NotNull(message = "the note is mandatory")
     private Integer note;
 
-    @NotNull(message = "the idEmployee is mandatory")
+    @NotNull(message = "the code is mandatory")
     private String code;
+
+    private String suggestion;
 
 }

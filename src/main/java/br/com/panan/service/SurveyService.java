@@ -32,6 +32,10 @@ public class SurveyService {
         survey.setNote(surveyPostRequestBody.getNote());
         survey.setEmployee(employeeRepository.findByCode(surveyPostRequestBody.getCode()).orElseThrow());
 
+        surveyPostRequestBody.setSuggestion(surveyPostRequestBody.getSuggestion().replace("'",""));
+        surveyPostRequestBody.setSuggestion(surveyPostRequestBody.getSuggestion().replace("\"",""));
+
+        survey.setSuggestion(surveyPostRequestBody.getSuggestion());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         LocalDateTime date = LocalDateTime.now(ZoneId.of("America/Cuiaba"));
         survey.setDate(date.toLocalDate());

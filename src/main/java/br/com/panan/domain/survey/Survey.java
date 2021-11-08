@@ -37,4 +37,6 @@ public class Survey {
     @NotNull(message = "the hour is mandatory")
     private String hour;
 
+    @Column(name = "suggestion", columnDefinition = "LONGTEXT")
+    private String suggestion;
 }

@@ -32,6 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		//autorizar cadastro de usuario
-		web.ignoring().antMatchers(HttpMethod.POST, "/cadaster");
+		web.ignoring().antMatchers(HttpMethod.POST, "/cadaster", "/survey");
+
 	}
 }

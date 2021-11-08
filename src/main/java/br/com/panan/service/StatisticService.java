@@ -1,5 +1,6 @@
 package br.com.panan.service;
 
+import br.com.panan.domain.employee.Employee;
 import br.com.panan.domain.employee.EmployeeRepository;
 import br.com.panan.domain.survey.Survey;
 import br.com.panan.domain.survey.SurveyRepository;
@@ -8,6 +9,8 @@ import br.com.panan.requests.GeneralStatisticsGetRequestBodyYear;
 import br.com.panan.requests.StatisticsMonthAndYear;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -19,6 +22,11 @@ public class StatisticService {
 
     @Autowired
     private SurveyRepository surveyRepository;
+
+
+    public Page<Survey> listSurveySuggestion(Pageable pageable) {
+        return surveyRepository.listSurveySuggestion(pageable);
+    }
 
 
     public GeneralStatisticsGetRequestBody getStatisticForDates(LocalDate localDateSmaller, LocalDate localDateBigger) {

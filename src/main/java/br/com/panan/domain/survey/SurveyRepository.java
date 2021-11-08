@@ -1,5 +1,7 @@
 package br.com.panan.domain.survey;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -32,8 +34,8 @@ public interface SurveyRepository extends JpaRepository<Survey, Long> {
     @Query("SELECT DISTINCT sur from Survey sur where sur.employee.id = ?1")
     public List<Survey> listSurveyWithIdEmployee(Long id);
 
-
-
+    @Query("SELECT DISTINCT sur from Survey sur where sur.employee.active= true AND sur.suggestion <> '' order by sur.hour desc")
+    public Page<Survey> listSurveySuggestion(Pageable pageable);
 
 
 }

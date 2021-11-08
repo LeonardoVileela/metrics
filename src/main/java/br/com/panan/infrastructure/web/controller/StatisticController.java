@@ -1,11 +1,15 @@
 package br.com.panan.infrastructure.web.controller;
 
+import br.com.panan.domain.employee.Employee;
+import br.com.panan.domain.survey.Survey;
 import br.com.panan.requests.GeneralStatisticsGetRequestBody;
 import br.com.panan.requests.GeneralStatisticsGetRequestBodyYear;
 import br.com.panan.service.StatisticService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,5 +47,12 @@ public class StatisticController {
         }
         return ResponseEntity.ok(statisticService.getStatisticForYear(year));
     }
+
+    @GetMapping(path = "/suggestion")
+    public ResponseEntity<Page<Survey>> findBySuggestion(Pageable pageable){
+        return ResponseEntity.ok(statisticService.listSurveySuggestion(pageable));
+    }
+
+
 
 }
