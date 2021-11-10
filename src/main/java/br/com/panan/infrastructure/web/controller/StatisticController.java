@@ -24,7 +24,7 @@ public class StatisticController {
     @Autowired
     private StatisticService statisticService;
 
-    @GetMapping(path = "/dates")
+   @GetMapping(path = "/dates")
     public ResponseEntity<GeneralStatisticsGetRequestBody> findByDates(@RequestParam String localDateSmaller, @RequestParam String localDateBigger, @RequestParam(required = false) Long idEmployee) {
         if (idEmployee != null) {
             return ResponseEntity.ok(statisticService.getStatisticForDatesEmployee(LocalDate.parse(localDateSmaller), LocalDate.parse(localDateBigger), idEmployee));

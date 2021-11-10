@@ -21,4 +21,5 @@ public class EmployeeAllActiveGetRequest {
     private String code;
 
     private Double average;
+
 }

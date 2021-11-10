@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -39,8 +40,18 @@ public class EmployeeController {
     }
 
     @GetMapping(path = "/active")
-    public ResponseEntity<List<EmployeeAllActiveGetRequest>> listEmployeesAllActive(){
-        return ResponseEntity.ok(employeeService.employeesAllActive());
+    public ResponseEntity<Page<EmployeeAllActiveGetRequest>> listEmployeesAllActive(Pageable pageable){
+        return ResponseEntity.ok(employeeService.employeesAllActive(pageable));
+    }
+
+    @PutMapping(path = "/activate/{id}")
+    public ResponseEntity<Employee> activateEmployee(@PathVariable Long id){
+        return new ResponseEntity<>(employeeService.activateEmployee(id), HttpStatus.OK);
+    }
+
+    @PutMapping(path = "/disable/{id}")
+    public ResponseEntity<Employee> disableEmployee(@PathVariable Long id){
+        return new ResponseEntity<>(employeeService.disableEmployee(id), HttpStatus.OK);
     }
 
 

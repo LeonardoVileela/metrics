@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.concurrent.ThreadLocalRandom;
 
 
 @Service
@@ -33,12 +35,18 @@ public class SurveyService {
         survey.setEmployee(employeeRepository.findByCode(surveyPostRequestBody.getCode()).orElseThrow());
 
         surveyPostRequestBody.setSuggestion(surveyPostRequestBody.getSuggestion().replace("'",""));
-        surveyPostRequestBody.setSuggestion(surveyPostRequestBody.getSuggestion().replace("\"",""));
+        surveyPostRequestBody.setSuggestion(surveyPostRequestBody.getSuggestion().replace("\""," "));
+        surveyPostRequestBody.setSuggestion(surveyPostRequestBody.getSuggestion().replace("\n", " ").replace("\r", ""));
 
         survey.setSuggestion(surveyPostRequestBody.getSuggestion());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         LocalDateTime date = LocalDateTime.now(ZoneId.of("America/Cuiaba"));
-        survey.setDate(date.toLocalDate());
+        long minDay = LocalDate.of(2018, 1, 1).toEpochDay();
+        long maxDay = LocalDate.of(2026, 12, 31).toEpochDay();
+        long randomDay = ThreadLocalRandom.current().nextLong(minDay, maxDay);
+        LocalDate randomDate = LocalDate.ofEpochDay(randomDay);
+        survey.setDate(randomDate);
+        //survey.setDate(date.toLocalDate());
         survey.setHour(date.format(formatter));
 
 
