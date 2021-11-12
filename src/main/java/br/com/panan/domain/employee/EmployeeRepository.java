@@ -16,7 +16,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     @Query(value = "SELECT * from Employee where active = false", countQuery = "SELECT count(*) from Employee where active = false", nativeQuery = true)
     public Page<Employee> listAllDisabled(Pageable pageable);
 
-    @Query(value = "SELECT new br.com.panan.requests.EmployeeAllActiveGetRequest(emp.id, emp.name , emp.code , AVG(sur.note)) FROM Employee emp INNER JOIN Survey sur ON emp.id = sur.employee.id GROUP BY emp.id", countQuery = "SELECT count(*) from Employee emp where emp.active = true")
+    @Query(value = "SELECT new br.com.panan.requests.EmployeeAllActiveGetRequest(emp.id, emp.name , emp.code , AVG(sur.note)) FROM Employee emp INNER JOIN Survey sur ON emp.id = sur.employee.id AND emp.active = true GROUP BY emp.id", countQuery = "SELECT count(*) from Employee emp where emp.active = true")
     public Page<EmployeeAllActiveGetRequest> listAllActive(Pageable pageable);
 
 

@@ -34,7 +34,7 @@ public interface SurveyRepository extends JpaRepository<Survey, Long> {
     @Query(value = "SELECT AVG(note) from Survey where employee_id = ?1", nativeQuery = true)
     public Double listSurveyWithIdEmployee(Long id);
 
-    @Query(value = "SELECT * from Survey where suggestion <> '' order by hour desc", countQuery = "SELECT count(*) from Survey where suggestion <> '' order by hour desc", nativeQuery = true)
+    @Query(value = "SELECT * from Survey where suggestion <> '' order by date DESC, hour DESC", countQuery = "SELECT count(*) from Survey where suggestion <> '' order by hour desc", nativeQuery = true)
     public Page<Survey> listSurveySuggestion(Pageable pageable);
 
 
