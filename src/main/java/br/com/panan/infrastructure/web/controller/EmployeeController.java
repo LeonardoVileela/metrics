@@ -3,7 +3,9 @@ package br.com.panan.infrastructure.web.controller;
 
 import br.com.panan.domain.employee.Employee;
 import br.com.panan.requests.EmployeeAllActiveGetRequest;
+import br.com.panan.requests.EmployeeGetRequestAvg;
 import br.com.panan.requests.EmployeePostRequestBody;
+import br.com.panan.requests.EmployeePutRequestBody;
 import br.com.panan.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -15,8 +17,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.time.LocalDateTime;
-import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -40,8 +40,13 @@ public class EmployeeController {
     }
 
     @GetMapping(path = "/active")
-    public ResponseEntity<Page<EmployeeAllActiveGetRequest>> listEmployeesAllActive(Pageable pageable){
-        return ResponseEntity.ok(employeeService.employeesAllActive(pageable));
+    public ResponseEntity<List<Employee>> listEmployeesAllActive(){
+        return ResponseEntity.ok(employeeService.employeesAllActive());
+    }
+
+    @GetMapping(path = "/average")
+    public ResponseEntity<List<EmployeeAllActiveGetRequest>> listEmployeesAvg(){
+        return ResponseEntity.ok(employeeService.employeeGetRequestAvg());
     }
 
     @PutMapping(path = "/activate/{id}")
@@ -52,6 +57,12 @@ public class EmployeeController {
     @PutMapping(path = "/disable/{id}")
     public ResponseEntity<Employee> disableEmployee(@PathVariable Long id){
         return new ResponseEntity<>(employeeService.disableEmployee(id), HttpStatus.OK);
+    }
+
+    @PutMapping
+    public ResponseEntity<Void> replace(@RequestBody @Valid EmployeePutRequestBody employeePutRequestBody){
+        employeeService.replace(employeePutRequestBody);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 

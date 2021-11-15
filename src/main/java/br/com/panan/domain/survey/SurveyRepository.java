@@ -1,9 +1,11 @@
 package br.com.panan.domain.survey;
 
+import br.com.panan.domain.employee.Employee;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -36,6 +38,12 @@ public interface SurveyRepository extends JpaRepository<Survey, Long> {
 
     @Query(value = "SELECT * from Survey where suggestion <> '' order by date DESC, hour DESC", countQuery = "SELECT count(*) from Survey where suggestion <> '' order by hour desc", nativeQuery = true)
     public Page<Survey> listSurveySuggestion(Pageable pageable);
+
+    @Query(value = "SELECT COUNT(*) FROM survey WHERE survey.employee_id = :employeeId", nativeQuery = true)
+    public Integer contSurvey(@Param("employeeId") Long employeeId);
+
+    @Query(value = "SELECT SUM(note) FROM survey WHERE survey.employee_id = :employeeId", nativeQuery = true)
+    public Integer sumSurvey(@Param("employeeId") Long employeeId);
 
 
 }

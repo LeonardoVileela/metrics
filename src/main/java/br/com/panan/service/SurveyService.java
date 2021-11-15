@@ -1,5 +1,6 @@
 package br.com.panan.service;
 
+import br.com.panan.domain.employee.Employee;
 import br.com.panan.domain.employee.EmployeeRepository;
 import br.com.panan.domain.survey.Survey;
 import br.com.panan.domain.survey.SurveyRepository;
@@ -32,7 +33,8 @@ public class SurveyService {
         // faço o mapeamento apenas com essa linha AnimeMapper.INSTANCE.toAnime(animePostRequestBody)
         Survey survey = new Survey();
         survey.setNote(surveyPostRequestBody.getNote());
-        survey.setEmployee(employeeRepository.findByCode(surveyPostRequestBody.getCode()).orElseThrow());
+        Employee employee = employeeRepository.findByCode(surveyPostRequestBody.getCode()).orElseThrow();
+        survey.setEmployee(employee);
 
         surveyPostRequestBody.setSuggestion(surveyPostRequestBody.getSuggestion().replace("'",""));
         surveyPostRequestBody.setSuggestion(surveyPostRequestBody.getSuggestion().replace("\""," "));
@@ -50,9 +52,15 @@ public class SurveyService {
 
         //survey.setDate(date.toLocalDate());
         survey.setHour(date.format(formatter));
-
-
+        statisticEmployee(employee);
         return surveyRepository.save(survey);
     }
 
+    private void statisticEmployee(Employee employee){
+        Integer contSurvey = surveyRepository.contSurvey(employee.getId());
+        Integer sumSurvey = surveyRepository.sumSurvey(employee.getId());
+        employee.setNoteTotal(sumSurvey);
+        employee.setSurveyTotal(contSurvey);
+        employeeRepository.save(employee);
+    }
 }

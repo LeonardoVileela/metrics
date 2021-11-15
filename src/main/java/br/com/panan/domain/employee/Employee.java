@@ -27,4 +27,8 @@ public class Employee {
 
     private Boolean active;
 
+    private Integer noteTotal;
+
+    private Integer surveyTotal;
+
 }
