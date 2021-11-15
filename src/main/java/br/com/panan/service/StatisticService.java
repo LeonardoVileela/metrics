@@ -23,13 +23,20 @@ public class StatisticService {
     @Autowired
     private SurveyRepository surveyRepository;
 
-
     public Page<Survey> listSurveySuggestion(Pageable pageable) {
         return surveyRepository.listSurveySuggestion(pageable);
     }
 
+    public Page<Survey> listSurveySuggestionFavorite(Pageable pageable) {
+        return surveyRepository.listSurveySuggestionFavorite(pageable);
+    }
+
     public Page<Survey> listSurveySuggestionSearch(String search,Pageable pageable) {
         return surveyRepository.findByEmployee_NameIgnoreCaseContainingOrderByDateDesc(search ,pageable);
+    }
+
+    public Page<Survey> listSurveySuggestionSearchFavorite(String search,Pageable pageable) {
+        return surveyRepository.findByEmployee_NameIgnoreCaseContainingAndSuggestionFavoriteIsTrueOrderByDateDesc(search ,pageable);
     }
 
 

@@ -39,6 +39,9 @@ public interface SurveyRepository extends JpaRepository<Survey, Long> {
     @Query(value = "SELECT * from Survey where suggestion <> '' order by date DESC, hour DESC", countQuery = "SELECT count(*) from Survey where suggestion <> '' order by hour desc", nativeQuery = true)
     public Page<Survey> listSurveySuggestion(Pageable pageable);
 
+    @Query(value = "SELECT * from Survey where suggestion <> '' and survey.suggestion_favorite = 1 order by date DESC, hour DESC", countQuery = "SELECT count(*) from Survey where suggestion <> '' order by hour desc", nativeQuery = true)
+    public Page<Survey> listSurveySuggestionFavorite(Pageable pageable);
+
     @Query(value = "SELECT COUNT(*) FROM survey WHERE survey.employee_id = :employeeId", nativeQuery = true)
     public Integer contSurvey(@Param("employeeId") Long employeeId);
 
@@ -46,6 +49,8 @@ public interface SurveyRepository extends JpaRepository<Survey, Long> {
     public Integer sumSurvey(@Param("employeeId") Long employeeId);
 
     public Page<Survey> findByEmployee_NameIgnoreCaseContainingOrderByDateDesc(String suggestion, Pageable pageable);
+
+    public Page<Survey> findByEmployee_NameIgnoreCaseContainingAndSuggestionFavoriteIsTrueOrderByDateDesc(String suggestion, Pageable pageable);
 
 
 }

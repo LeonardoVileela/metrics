@@ -52,10 +52,19 @@ public class StatisticController {
     public ResponseEntity<Page<Survey>> findBySuggestion(Pageable pageable){
         return ResponseEntity.ok(statisticService.listSurveySuggestion(pageable));
     }
+    @GetMapping(path = "/suggestion/favorite")
+    public ResponseEntity<Page<Survey>> findBySuggestionFavorite(Pageable pageable){
+        return ResponseEntity.ok(statisticService. listSurveySuggestionFavorite(pageable));
+    }
 
     @GetMapping(path = "/suggestion/{search}")
     public ResponseEntity<Page<Survey>> searchBySuggestion(@PathVariable String search,Pageable pageable){
         return ResponseEntity.ok(statisticService.listSurveySuggestionSearch(search, pageable));
+    }
+
+    @GetMapping(path = "/suggestion/favorite/{search}")
+    public ResponseEntity<Page<Survey>> searchBySuggestionFavorite(@PathVariable String search,Pageable pageable){
+        return ResponseEntity.ok(statisticService.listSurveySuggestionSearchFavorite(search, pageable));
     }
 
 
