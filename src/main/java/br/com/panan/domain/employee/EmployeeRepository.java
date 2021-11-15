@@ -19,6 +19,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     @Query(value = "SELECT * from Employee where active = false", countQuery = "SELECT count(*) from Employee where active = false", nativeQuery = true)
     public Page<Employee> listAllDisabled(Pageable pageable);
 
+    public Page<Employee> findByNameIgnoreCaseContainingAndActiveIsFalse(String name, Pageable pageable);
 
     @Query(value = "SELECT * from Employee where active = true ORDER BY name", countQuery = "SELECT count(*) from Employee where active = false", nativeQuery = true)
     public List<Employee> listAllActive();

@@ -28,6 +28,10 @@ public class StatisticService {
         return surveyRepository.listSurveySuggestion(pageable);
     }
 
+    public Page<Survey> listSurveySuggestionSearch(String search,Pageable pageable) {
+        return surveyRepository.findByEmployee_NameIgnoreCaseContainingOrderByDateDesc(search ,pageable);
+    }
+
 
     public GeneralStatisticsGetRequestBody getStatisticForDates(LocalDate localDateSmaller, LocalDate localDateBigger) {
         List<Survey> listSurveyForDates = surveyRepository.listSurveyForDates(localDateSmaller, localDateBigger);

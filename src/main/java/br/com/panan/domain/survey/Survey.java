@@ -39,4 +39,6 @@ public class Survey {
 
     @Column(name = "suggestion", columnDefinition = "LONGTEXT")
     private String suggestion;
+
+    private Boolean suggestionFavorite;
 }

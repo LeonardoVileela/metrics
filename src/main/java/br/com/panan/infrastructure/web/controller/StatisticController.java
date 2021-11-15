@@ -53,6 +53,11 @@ public class StatisticController {
         return ResponseEntity.ok(statisticService.listSurveySuggestion(pageable));
     }
 
+    @GetMapping(path = "/suggestion/{search}")
+    public ResponseEntity<Page<Survey>> searchBySuggestion(@PathVariable String search,Pageable pageable){
+        return ResponseEntity.ok(statisticService.listSurveySuggestionSearch(search, pageable));
+    }
+
 
 
 }

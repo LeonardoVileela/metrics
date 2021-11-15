@@ -4,6 +4,7 @@ import br.com.panan.domain.employee.Employee;
 import br.com.panan.domain.employee.EmployeeRepository;
 import br.com.panan.domain.survey.Survey;
 import br.com.panan.domain.survey.SurveyRepository;
+import br.com.panan.requests.EmployeePutRequestBody;
 import br.com.panan.requests.SurveyPostRequestBody;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,7 @@ public class SurveyService {
         survey.setNote(surveyPostRequestBody.getNote());
         Employee employee = employeeRepository.findByCode(surveyPostRequestBody.getCode()).orElseThrow();
         survey.setEmployee(employee);
+        survey.setSuggestionFavorite(false);
 
         surveyPostRequestBody.setSuggestion(surveyPostRequestBody.getSuggestion().replace("'",""));
         surveyPostRequestBody.setSuggestion(surveyPostRequestBody.getSuggestion().replace("\""," "));
@@ -52,8 +54,9 @@ public class SurveyService {
 
         //survey.setDate(date.toLocalDate());
         survey.setHour(date.format(formatter));
+        Survey survey1 = surveyRepository.save(survey);
         statisticEmployee(employee);
-        return surveyRepository.save(survey);
+        return survey1;
     }
 
     private void statisticEmployee(Employee employee){
@@ -62,5 +65,13 @@ public class SurveyService {
         employee.setNoteTotal(sumSurvey);
         employee.setSurveyTotal(contSurvey);
         employeeRepository.save(employee);
+    }
+    @Transactional(rollbackFor = Exception.class)
+    public Survey replaceFavorite(Long idSurvey) {
+        //essas variaveis auxiliares são necessarias, pq é necessario que eu tenha
+        //certeza que esse id vem do banco
+        Survey survey = surveyRepository.findById(idSurvey).orElseThrow();
+        survey.setSuggestionFavorite(!survey.getSuggestionFavorite());
+        return surveyRepository.save(survey);
     }
 }

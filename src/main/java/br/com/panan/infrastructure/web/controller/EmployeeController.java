@@ -2,6 +2,7 @@ package br.com.panan.infrastructure.web.controller;
 
 
 import br.com.panan.domain.employee.Employee;
+import br.com.panan.domain.survey.Survey;
 import br.com.panan.requests.EmployeeAllActiveGetRequest;
 import br.com.panan.requests.EmployeeGetRequestAvg;
 import br.com.panan.requests.EmployeePostRequestBody;
@@ -39,6 +40,11 @@ public class EmployeeController {
         return ResponseEntity.ok(employeeService.employeesAllDisabled(pageable));
     }
 
+    @GetMapping(path = "/disabled/{search}")
+    public ResponseEntity<Page<Employee>> listEmployeSearchByName(@PathVariable String search, Pageable pageable){
+        return ResponseEntity.ok(employeeService.listEmployeSearchByName(search, pageable));
+    }
+
     @GetMapping(path = "/active")
     public ResponseEntity<List<Employee>> listEmployeesAllActive(){
         return ResponseEntity.ok(employeeService.employeesAllActive());
@@ -63,6 +69,11 @@ public class EmployeeController {
     public ResponseEntity<Void> replace(@RequestBody @Valid EmployeePutRequestBody employeePutRequestBody){
         employeeService.replace(employeePutRequestBody);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping(path = "/code/{code}")
+    public ResponseEntity<Employee> listEmployeesAllActive(@PathVariable String code){
+        return ResponseEntity.ok(employeeService.findByCodeEmployee(code));
     }
 
 

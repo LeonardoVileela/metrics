@@ -2,6 +2,7 @@ package br.com.panan.service;
 
 import br.com.panan.domain.employee.Employee;
 import br.com.panan.domain.employee.EmployeeRepository;
+import br.com.panan.domain.survey.Survey;
 import br.com.panan.domain.survey.SurveyRepository;
 import br.com.panan.exception.BadRequestException;
 import br.com.panan.mapper.EmployeeMapper;
@@ -38,6 +39,14 @@ public class EmployeeService {
 
     public List<Employee> employeesAllActive() {
         return employeeRepository.listAllActive();
+    }
+
+    public Employee findByCodeEmployee(String code){
+        return employeeRepository.findByCode(code).orElseThrow();
+    }
+
+    public Page<Employee> listEmployeSearchByName(String search, Pageable pageable) {
+        return employeeRepository.findByNameIgnoreCaseContainingAndActiveIsFalse(search ,pageable);
     }
 
 

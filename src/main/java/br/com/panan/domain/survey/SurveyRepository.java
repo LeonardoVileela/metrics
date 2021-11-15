@@ -45,5 +45,7 @@ public interface SurveyRepository extends JpaRepository<Survey, Long> {
     @Query(value = "SELECT SUM(note) FROM survey WHERE survey.employee_id = :employeeId", nativeQuery = true)
     public Integer sumSurvey(@Param("employeeId") Long employeeId);
 
+    public Page<Survey> findByEmployee_NameIgnoreCaseContainingOrderByDateDesc(String suggestion, Pageable pageable);
+
 
 }

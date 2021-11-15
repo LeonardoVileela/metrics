@@ -1,6 +1,8 @@
 package br.com.panan.infrastructure.web.controller;
 
+import br.com.panan.domain.employee.Employee;
 import br.com.panan.domain.survey.Survey;
+import br.com.panan.requests.EmployeePutRequestBody;
 import br.com.panan.requests.SurveyPostRequestBody;
 import br.com.panan.service.SurveyService;
 import lombok.RequiredArgsConstructor;
@@ -8,10 +10,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -31,6 +30,11 @@ public class SurveyController {
            return new ResponseEntity<>(HttpStatus.CREATED);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @PutMapping(path = "/favorite/{id}")
+    public ResponseEntity<Survey> listEmployeesAllActive(@PathVariable Long id){
+        return ResponseEntity.ok(surveyService.replaceFavorite(id));
     }
 
 }
