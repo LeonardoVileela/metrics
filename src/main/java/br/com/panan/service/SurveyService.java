@@ -46,13 +46,14 @@ public class SurveyService {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         LocalDateTime date = LocalDateTime.now(ZoneId.of("America/Cuiaba"));
 
-        long minDay = LocalDate.of(2020, 1, 1).toEpochDay();
-        long maxDay = LocalDate.of(2026, 12, 31).toEpochDay();
-        long randomDay = ThreadLocalRandom.current().nextLong(minDay, maxDay);
-        LocalDate randomDate = LocalDate.ofEpochDay(randomDay);
-        survey.setDate(randomDate);
+        // gerando data random pro teste
+        //long minDay = LocalDate.of(2020, 1, 1).toEpochDay();
+        //long maxDay = LocalDate.of(2026, 12, 31).toEpochDay();
+        //long randomDay = ThreadLocalRandom.current().nextLong(minDay, maxDay);
+        //LocalDate randomDate = LocalDate.ofEpochDay(randomDay);
+        //survey.setDate(randomDate);
 
-        //survey.setDate(date.toLocalDate());
+        survey.setDate(date.toLocalDate());
         survey.setHour(date.format(formatter));
         Survey survey1 = surveyRepository.save(survey);
         statisticEmployee(employee);
