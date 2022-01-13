@@ -4,8 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class PananApplication {
+public class MetricsApplication {
     public static void main(String[] args) {
-        SpringApplication.run(PananApplication.class, args);
+        SpringApplication.run(MetricsApplication.class, args);
     }
 }
