@@ -1,5 +1,6 @@
 package br.com.panan.domain.survey;
 
+import br.com.panan.domain.appuser.AppUser;
 import br.com.panan.domain.employee.Employee;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,6 +31,9 @@ public class Survey {
 
     @ManyToOne
     private Employee employee;
+
+    @ManyToOne
+    private AppUser appUser;
 
     @NotNull(message = "the dateTime is mandatory")
     private LocalDate date;

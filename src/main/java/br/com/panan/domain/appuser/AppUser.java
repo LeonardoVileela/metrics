@@ -17,6 +17,11 @@ import javax.persistence.Id;
 @Builder
 public class AppUser {
 
+    public AppUser(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

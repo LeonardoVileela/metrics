@@ -1,5 +1,7 @@
 package br.com.panan.service;
 
+import br.com.panan.domain.appuser.AppUser;
+import br.com.panan.domain.appuser.AppUserRepository;
 import br.com.panan.domain.employee.Employee;
 import br.com.panan.domain.employee.EmployeeRepository;
 import br.com.panan.domain.survey.Survey;
@@ -8,6 +10,7 @@ import br.com.panan.requests.EmployeePutRequestBody;
 import br.com.panan.requests.SurveyPostRequestBody;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,6 +30,9 @@ public class SurveyService {
 
     @Autowired
     private EmployeeRepository employeeRepository;
+
+    @Autowired
+    private AppUserRepository appUserRepository;
 
 
     @Transactional(rollbackFor = Exception.class)
@@ -55,6 +61,11 @@ public class SurveyService {
 
         survey.setDate(date.toLocalDate());
         survey.setHour(date.format(formatter));
+
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        AppUser appUser = appUserRepository.findByUsername(username);
+        survey.setAppUser(appUser);
+
         Survey survey1 = surveyRepository.save(survey);
         statisticEmployee(employee);
         return survey1;
